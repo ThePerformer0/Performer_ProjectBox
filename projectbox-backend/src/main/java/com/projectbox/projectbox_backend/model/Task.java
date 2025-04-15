@@ -11,31 +11,31 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Tache {
+public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String titre;
+    private String title;
     private String description;
-    private StatutTache statut;
-    private LocalDate dateEcheance;
+    private Statut statut;
+    private LocalDate dueDate;
 
     @ManyToOne
     @JoinColumn(name = "projet_id")
-    private Projet projet;
+    private Project project;
 
     @ManyToOne
     @JoinColumn(name = "assignee_id")
-    private Utilisateur assignee;
+    private User assignee;
 
-    public String getTitre() {
-        return titre;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTitre(String titre) {
-        this.titre = titre;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
@@ -46,35 +46,35 @@ public class Tache {
         this.description = description;
     }
 
-    public StatutTache getStatut() {
+    public Statut getStatut() {
         return statut;
     }
 
-    public void setStatut(StatutTache statut) {
+    public void setStatut(Statut statut) {
         this.statut = statut;
     }
 
-    public LocalDate getDateEcheance() {
-        return dateEcheance;
+    public LocalDate getDueDate() {
+        return dueDate;
     }
 
-    public void setDateEcheance(LocalDate dateEcheance) {
-        this.dateEcheance = dateEcheance;
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
     }
 
-    public Projet getProjet() {
-        return projet;
+    public Project getProject() {
+        return project;
     }
 
-    public void setProjet(Projet projet) {
-        this.projet = projet;
+    public void setProject(Project project) {
+        this.project = project;
     }
 
-    public Utilisateur getAssignee() {
+    public User getAssignee() {
         return assignee;
     }
 
-    public void setAssignee(Utilisateur assignee) {
+    public void setAssignee(User assignee) {
         this.assignee = assignee;
     }
 }
