@@ -13,6 +13,10 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Task {
 
+    public Long getId() {
+        return id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,7 +27,7 @@ public class Task {
     private LocalDate dueDate;
 
     @ManyToOne
-    @JoinColumn(name = "projet_id")
+    @JoinColumn(name = "project_id")
     private Project project;
 
     @ManyToOne

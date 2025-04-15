@@ -19,13 +19,13 @@ public class User {
     private String nom;
     private String prenom;
     private String email;
-    private String passWord;
+    private String password;
 
     @Column(name = "Poste")
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    @OneToMany(mappedBy = "createur")
+    @OneToMany(mappedBy = "creator")
     private List<Project> projects;
 
     @OneToMany(mappedBy = "assignee")
@@ -55,12 +55,12 @@ public class User {
         this.email = email;
     }
 
-    public String getPassWord() {
-        return passWord;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public UserRole getRole() {

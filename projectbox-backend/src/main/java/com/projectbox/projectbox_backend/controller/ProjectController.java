@@ -1,5 +1,7 @@
 package com.projectbox.projectbox_backend.controller;
 
+import com.projectbox.projectbox_backend.dto.ProjectDTO;
+import com.projectbox.projectbox_backend.mapper.ProjectMapper;
 import com.projectbox.projectbox_backend.model.Project;
 import com.projectbox.projectbox_backend.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,23 +19,23 @@ public class ProjectController {
 
     @PostMapping
     public Project creerProjet(@RequestBody Project project) {
-        System.out.println("Hellos");
+        System.out.println("Hello");
         return projectService.creerProjet(project);
     }
 
     @GetMapping("/{id}")
-    public Project obtenirProjet(@PathVariable Long id) {
-        return projectService.obtenirProjetParId(id);
+    public ProjectDTO obtenirProjet(@PathVariable Long id) {
+        return ProjectMapper.toDTO(projectService.obtenirProjetParId(id));
     }
 
     @GetMapping
-    public List<Project> obtenirTousLesProjets() {
-        return projectService.obtenirTousLesProjets();
+    public List<ProjectDTO> obtenirTousLesProjets() { ;
+        return ProjectMapper.toDTOList(projectService.obtenirTousLesProjets());
     }
 
-    @GetMapping("/utilisateur/{id}")
-    public List<Project> obtenirProjetsParUtilisateur(@PathVariable Long id) {
-        return projectService.obtenirProjetsParCreateur(id);
+    @GetMapping("/user/{id}")
+    public List<ProjectDTO> obtenirProjetsParUtilisateur(@PathVariable Long id) {
+        return ProjectMapper.toDTOList(projectService.obtenirProjetsParCreateur(id));
     }
 
     @PutMapping("/{id}")

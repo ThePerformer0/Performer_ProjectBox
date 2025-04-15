@@ -36,7 +36,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<Task> obtenirTacheParProjet(Long projetId) {
-        return taskRepository.findByProjetId(projetId);
+        return taskRepository.findByProject_id(projetId);
     }
 
     @Override

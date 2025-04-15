@@ -1,12 +1,14 @@
 package com.projectbox.projectbox_backend.controller;
 
+import com.projectbox.projectbox_backend.dto.UserDTO;
+import com.projectbox.projectbox_backend.mapper.UserMapper;
 import com.projectbox.projectbox_backend.model.User;
 import com.projectbox.projectbox_backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/user")
@@ -22,23 +24,25 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User obtenirUtilisateurParId(@PathVariable Long id){
-        return userService.obtenirUtilisateurParId(id);
+    public UserDTO obtenirUtilisateurParId(@PathVariable Long id){
+        return UserMapper.toDTO(userService.obtenirUtilisateurParId(id));
     }
 
     @GetMapping
-    public List<User> obtenirTousLesUtilisateurs() {
-        return userService.obtenirTousLesUtilisateurs();
+    public List<UserDTO> obtenirTousLesUtilisateurs() {
+        return UserMapper.toDTOList(userService.obtenirTousLesUtilisateurs());
     }
 
-    @GetMapping("/utilisateur/{email}")
-    public Optional<User> obtenirUtilisateurParEmail(@PathVariable String email) {
-        return userService.obtenirUtilisateurParEmail(email);
+    @GetMapping("/{email}")
+    public ResponseEntity<UserDTO> obtenirUtilisateurParEmail(@PathVariable String email) {
+        return userService.obtenirUtilisateurParEmail(email)
+                .map(user -> ResponseEntity.ok(UserMapper.toDTO(user)))
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public User mettreAJourUtilisateur(@PathVariable Long id, @RequestBody User utilisateur) {
-        return userService.mettreAJourUtilisateur(id, utilisateur);
+    public UserDTO mettreAJourUtilisateur(@PathVariable Long id, @RequestBody User user) {
+        return UserMapper.toDTO(userService.mettreAJourUtilisateur(id, user));
     }
 
     @DeleteMapping("/{id}")

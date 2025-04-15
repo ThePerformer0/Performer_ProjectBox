@@ -30,7 +30,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<Project> obtenirProjetsParCreateur(Long createurId) {
-        return projectRepository.findByCreateurId(createurId);
+        return projectRepository.findByCreator_id(createurId);
     }
 
     @Override

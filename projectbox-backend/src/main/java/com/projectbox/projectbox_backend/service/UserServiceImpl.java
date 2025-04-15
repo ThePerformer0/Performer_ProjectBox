@@ -42,7 +42,8 @@ public class UserServiceImpl implements UserService {
         utilisateurExistant.setEmail(utilisateurModifie.getEmail());
         utilisateurExistant.setPrenom(utilisateurModifie.getPrenom());
         utilisateurExistant.setNom(utilisateurModifie.getNom());
-        utilisateurExistant.setPassWord(utilisateurModifie.getPassWord());
+        utilisateurExistant.setPassword(utilisateurModifie.getPassword());
+        utilisateurExistant.setRole(utilisateurModifie.getRole());
         return UserRepository.save(utilisateurExistant);
     }
 
@@ -53,7 +54,7 @@ public class UserServiceImpl implements UserService {
             var user = new User();
             user.setNom("admin");
             user.setEmail("admin@gmail.com");
-            user.setPassWord((new BCryptPasswordEncoder()).encode("0000"));
+            user.setPassword((new BCryptPasswordEncoder()).encode("0000"));
             user.setRole(UserRole.ADMIN);
 
             UserRepository.save(user);

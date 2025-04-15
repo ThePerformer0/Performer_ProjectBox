@@ -1,5 +1,7 @@
 package com.projectbox.projectbox_backend.controller;
 
+import com.projectbox.projectbox_backend.dto.TaskDTO;
+import com.projectbox.projectbox_backend.mapper.TaskMapper;
 import com.projectbox.projectbox_backend.model.Statut;
 import com.projectbox.projectbox_backend.model.Task;
 import com.projectbox.projectbox_backend.service.TaskService;
@@ -22,23 +24,23 @@ public class TaskController {
     }
 
     @GetMapping("/{id}")
-    public Task obtenirTache(@PathVariable Long id){
-        return taskService.obtenirTacheParId(id);
+    public TaskDTO obtenirTache(@PathVariable Long id){
+        return TaskMapper.toDTO(taskService.obtenirTacheParId(id));
     }
 
     @GetMapping
-    public List<Task> obtenirToutesLesTaches() {
-        return taskService.obtenirToutesLesTaches();
+    public List<TaskDTO> obtenirToutesLesTaches() {
+        return TaskMapper.toDTOList(taskService.obtenirToutesLesTaches());
     }
 
     @GetMapping("/{statut}")
-    public List<Task> obtenirTacheParSatut(@PathVariable Statut statut) {
-        return taskService.obtenirTacheParSatut(statut);
+    public List<TaskDTO> obtenirTacheParSatut(@PathVariable Statut statut) {
+        return TaskMapper.toDTOList(taskService.obtenirTacheParSatut(statut));
     }
 
     @GetMapping("/project/{projectId}")
-    public List<Task> obtenirTacheParProjet(@PathVariable Long projectId) {
-        return taskService.obtenirTacheParProjet(projectId);
+    public List<TaskDTO> obtenirTacheParProjet(@PathVariable Long projectId) {
+        return TaskMapper.toDTOList(taskService.obtenirTacheParProjet(projectId));
     }
 
     @PutMapping("/{id}")

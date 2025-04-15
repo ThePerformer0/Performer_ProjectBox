@@ -12,6 +12,10 @@ import java.util.List;
 @AllArgsConstructor
 public class Project {
 
+    public Long getId() {
+        return id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,10 +26,10 @@ public class Project {
     private LocalDate endDate;
 
     @ManyToOne
-    @JoinColumn(name = "createur_id")
+    @JoinColumn(name = "creator_id")
     private User creator;
 
-    @OneToMany(mappedBy = "projet", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private List<Task> tasks;
 
     public String getTitle() {
