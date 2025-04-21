@@ -1,5 +1,6 @@
 package com.projectbox.projectbox_backend.service;
 
+import com.projectbox.projectbox_backend.exception.ResourceNotFoundException;
 import com.projectbox.projectbox_backend.model.Project;
 import com.projectbox.projectbox_backend.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public Project obtenirProjetParId(Long id) {
         return projectRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Project non trouvé avec ID : " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Projet non trouvé avec ID : " + id));
     }
 
     @Override
